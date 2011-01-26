@@ -1,7 +1,7 @@
 <?php
 /**
  * Jonah_Driver factory.
- * 
+ *
  * Copyright 2010 The Horde Project (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (BSD). If you did not
@@ -11,7 +11,7 @@
  * @author Ben Klang <ben@alkaloid.net>
  * @package Jonah
  */
-class Jonah_Injector_Factory_Driver
+class Jonah_Factory_Driver
 {
     /**
      * Instances.
@@ -26,7 +26,7 @@ class Jonah_Injector_Factory_Driver
      * @var Horde_Injector
      */
     private $_injector;
-    
+
     /**
      * Constructor.
      *
