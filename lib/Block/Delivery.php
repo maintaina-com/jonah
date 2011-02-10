@@ -1,10 +1,6 @@
 <?php
-
-$block_name = _("Feeds");
-
 /**
- * This class extends Horde_Block:: to provide a list of deliverable internal
- * channels.
+ * Provides a list of deliverable internal channels.
  *
  * Copyright 2004-2011 The Horde Project (http://www.horde.org/)
  *
@@ -12,18 +8,24 @@ $block_name = _("Feeds");
  * did not receive this file, see http://cvs.horde.org/co.php/jonah/LICENSE.
  *
  * @author  Roel Gloudemans <roel@gloudemans.info>
- * @package Horde_Block
  */
-class Horde_Block_Jonah_delivery extends Horde_Block
+class Jonah_Block_Delivery extends Horde_Block
 {
-    var $_app = 'jonah';
-
-    function _title()
+    /**
+     */
+    public function getName()
     {
         return _("Feeds");
     }
 
-    function _content()
+    /**
+     */
+    protected function _title()
+    {
+        return $this->getName();
+    }
+
+    protected function _content()
     {
         try {
             $channels = $GLOBALS['injector']->getInstance('Jonah_Driver')->getChannels();

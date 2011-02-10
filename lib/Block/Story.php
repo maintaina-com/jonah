@@ -1,10 +1,6 @@
 <?php
-
-$block_name = _("Story");
-
 /**
- * This class extends Horde_Block:: to provide the api to embed news
- * in other Horde applications.
+ * Provide API to embed news in other Horde applications.
  *
  * Copyright 2002-2007 Roel Gloudemans <roel@gloudemans.info>
  *
@@ -12,17 +8,23 @@ $block_name = _("Story");
  * did not receive this file, see http://cvs.horde.org/co.php/jonah/LICENSE.
  *
  * @author  Roel Gloudemans <roel@gloudemans.info>
- * @package Horde_Block
  */
-class Horde_Block_Jonah_story extends Horde_Block {
-
-    var $_app = 'jonah';
-
-    var $_story = null;
+class Jonah_Block_Story extends Horde_Block
+{
+    /**
+     */
+    protected $_story = null;
 
     /**
      */
-    function _params()
+    public function getName()
+    {
+        return _("Story");
+    }
+
+    /**
+     */
+    protected function _params()
     {
         $channels = $GLOBALS['injector']->getInstance('Jonah_Driver')->getChannels();
         $channel_choices = array();
@@ -31,27 +33,31 @@ class Horde_Block_Jonah_story extends Horde_Block {
         }
         natcasesort($channel_choices);
 
-        return array('source' => array(
-                         'name' => _("Feed"),
-                         'type' => 'enum',
-                         'values' => $channel_choices),
-                     'story' => array(
-                         'name' => _("Story"),
-                         'type' => 'int'),
-                     'countReads' => array(
-                         'name' => _("Count reads of this story when this block is displayed"),
-                         'type' => 'boolean',
-                         'default' => false),
+        return array(
+            'source' => array(
+                'name' => _("Feed"),
+                'type' => 'enum',
+                'values' => $channel_choices
+            ),
+            'story' => array(
+                'name' => _("Story"),
+                'type' => 'int'
+            ),
+            'countReads' => array(
+                'name' => _("Count reads of this story when this block is displayed"),
+                'type' => 'boolean',
+                'default' => false
+            )
         );
     }
 
     /**
      */
-    function _title()
+    protected function _title()
     {
         if (empty($this->_params['source']) ||
             empty($this->_params['story'])) {
-            return _("Story");
+            return $this->getName();
         }
 
         try {
@@ -67,7 +73,7 @@ class Horde_Block_Jonah_story extends Horde_Block {
 
     /**
      */
-    function _content()
+    protected function _content()
     {
         if (empty($this->_params['source']) || empty($this->_params['story'])) {
             return _("No story is selected.");
@@ -99,7 +105,7 @@ class Horde_Block_Jonah_story extends Horde_Block {
     /**
      * Get the story the block is configured for.
      */
-    function _fetch()
+    private function _fetch()
     {
         if (is_null($this->_story)) {
             $this->_story = $GLOBALS['injector']->getInstance('Jonah_Driver')->getStory(

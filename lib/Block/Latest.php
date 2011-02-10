@@ -1,10 +1,6 @@
 <?php
-
-$block_name = _("Latest News");
-
 /**
- * This class extends Horde_Block:: to provide the api to embed news
- * in other Horde applications.
+ * Provide the api to embed the lates news story in other Horde applications.
  *
  * Copyright 2002-2010 Roel Gloudemans <roel@gloudemans.info>
  *
@@ -14,14 +10,22 @@ $block_name = _("Latest News");
  * @author  Roel Gloudemans <roel@gloudemans.info>
  * @package Jonah
  */
-class Horde_Block_Jonah_latest extends Horde_Block
+class Jonah_Block_Latest extends Horde_Block
 {
-    var $_app = 'jonah';
-    var $_story = null;
+    /**
+     */
+    protected $_story = null;
 
     /**
      */
-    function _params()
+    public function getName()
+    {
+        return _("Latest News");
+    }
+
+    /**
+     */
+    protected function _params()
     {
         $params['source'] = array('name' => _("News Source"),
                                   'type' => 'enum',
@@ -47,10 +51,10 @@ class Horde_Block_Jonah_latest extends Horde_Block
 
     /**
      */
-    function _title()
+    protected function _title()
     {
         if (empty($this->_params['source'])) {
-            return _("Latest News");
+            return $this->getName();
         }
 
         try {
@@ -67,7 +71,7 @@ class Horde_Block_Jonah_latest extends Horde_Block
 
     /**
      */
-    function _content()
+    protected function _content()
     {
         if (empty($this->_params['source'])) {
             return _("No channel specified.");
@@ -89,7 +93,7 @@ class Horde_Block_Jonah_latest extends Horde_Block
     /**
      * Get the latest story.
      */
-    function _fetch()
+    private function _fetch()
     {
         if (empty($this->_params['source'])) {
             return;

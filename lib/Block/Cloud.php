@@ -1,7 +1,4 @@
 <?php
-
-$block_name = _("Tag Cloud");
-
 /**
  * Display Tag Cloud
  *
@@ -11,15 +8,19 @@ $block_name = _("Tag Cloud");
  * did not receive this file, see http://www.fsf.org/copyleft/gpl.html.
  *
  * @author  Michael Rubinsky <mrubinsk@horde.org>
- * @package Horde_Block
  */
-class Horde_Block_jonah_cloud extends Horde_Block {
-
-    var $_app = 'jonah';
+class Jonah_Block_Cloud extends Horde_Block
+{
+    /**
+     */
+    public function getName()
+    {
+        return _("Tag Cloud");
+    }
 
     /**
      */
-    function _params()
+    protected function _params()
     {
         return array(
             'results_url' => array(
@@ -30,12 +31,12 @@ class Horde_Block_jonah_cloud extends Horde_Block {
         );
     }
 
-    function _title()
+    protected function _title()
     {
-        return _("Tag Cloud");
+        return $this->getName();
     }
 
-    function _content()
+    protected function _content()
     {
         /* Get the tags */
         $tags = $GLOBALS['injector']->getInstance('Jonah_Driver')->listTagInfo();

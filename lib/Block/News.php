@@ -1,10 +1,6 @@
 <?php
-
-$block_name = _("Most Popular Stories");
-
 /**
- * This class extends Horde_Block:: to provide an api to embed news
- * in other Horde applications.
+ * Provide an api to embed news in other Horde applications.
  *
  * Copyright 2002-2009 The Horde Project (http://www.horde.org/)
  *
@@ -12,15 +8,19 @@ $block_name = _("Most Popular Stories");
  * did not receive this file, see http://cvs.horde.org/co.php/jonah/LICENSE.
  *
  * @author  Chuck Hagenbuch <chuck@horde.org>
- * @author  Michael Rubinsky <mrubinsk@horde.org>
- *
- * @package Horde_Block
  */
-class Horde_Block_Jonah_news_popular extends Horde_Block {
+class Jonah_Block_News extends Horde_Block
+{
+    /**
+     */
+    public function getName()
+    {
+        return _("Feed");
+    }
 
-    var $_app = 'jonah';
-
-    function _params()
+    /**
+     */
+    protected function _params()
     {
         require JONAH_BASE . '/config/templates.php';
 
@@ -29,16 +29,15 @@ class Horde_Block_Jonah_news_popular extends Horde_Block {
                                   'values' => array());
 
         $channels = $GLOBALS['injector']->getInstance('Jonah_Driver')->getChannels();
-        foreach ($channels as  $channel) {
-            if ($channel['channel_type'] == Jonah::INTERNAL_CHANNEL) {
-                $params['source']['values'][$channel['channel_id']] = $channel['channel_name'];
-            }
+        foreach ($channels as $channel) {
+            $params['source']['values'][$channel['channel_id']] = $channel['channel_name'];
         }
         natcasesort($params['source']['values']);
 
         $params['view'] = array('name' => _("View"),
                                 'type' => 'enum',
-                                'values' => array());
+                                'values' => array(),
+                                );
         foreach ($templates as $key => $template) {
             $params['view']['values'][$key] = $template['name'];
         }
@@ -48,44 +47,50 @@ class Horde_Block_Jonah_news_popular extends Horde_Block {
                                'default' => 10,
                                'required' => false);
 
+        $params['from'] = array('name' => _("First Story"),
+                                'type' => 'int',
+                                'default' => 0,
+                                'required' => false);
+
         return $params;
     }
 
-    function _title()
+    /**
+     */
+    protected function _title()
     {
         try {
             $channel = $GLOBALS['injector']->getInstance('Jonah_Driver')->getChannel($this->_params['source']);
-        } catch (Exception $e) {
+        } catch (Jonah_Exception $e) {
             return htmlspecialchars($e->getMessage());
         }
 
         if (!empty($channel['channel_link'])) {
             $title = Horde::link(htmlspecialchars($channel['channel_link']), '', '', '_blank')
                 . htmlspecialchars($channel['channel_name'])
-                . _(" - Most read stories") . '</a>';
+                . '</a>';
         } else {
-            $title = htmlspecialchars($channel['channel_name'])
-                . _(" - Most read stories");
+            $title = htmlspecialchars($channel['channel_name']);
         }
 
         return $title;
     }
 
-    function _content()
+    /**
+     */
+    protected function _content()
     {
         if (empty($this->_params['source'])) {
             return _("No feed specified.");
         }
 
-        $params = $this->_params();
-
         $view = isset($this->_params['view']) ? $this->_params['view'] : 'standard';
-        if (!isset($this->_params['max'])) {
-            $this->_params['max'] = $params['max']['default'];
-        }
 
-
-        return $GLOBALS['injector']->getInstance('Jonah_Driver')->renderChannel($this->_params['source'], $view, $this->_params['max'], 0, Jonah::ORDER_READ);
+        return $GLOBALS['injector']->getInstance('Jonah_Driver')->renderChannel(
+                $this->_params['source'],
+                $view,
+                $this->_params['max'],
+                $this->_params['from']);
     }
 
 }
