@@ -3,7 +3,9 @@
  * This file stores the templates used to generate different views of
  * news channels.
  *
- * $Id$
+ * IMPORTANT: Local overrides should be placed in templates.local.php, or
+ * templates-servername.php if the 'vhosts' setting has been enabled in Horde's
+ * configuration.
  */
 
 $templates['standard'] = array('name' => _("Standard"),
@@ -57,3 +59,8 @@ $templates['ultracompact'] = array('name' => _("Ultracompact"),
 :: <a target="blank" href="<tag:stories.permalink />"><tag:stories.title /></a>
 </loop:stories>
 </if:stories>');
+
+/* Local overrides. */
+if (file_exists(dirname(__FILE__) . '/templates.local.php')) {
+    include dirname(__FILE__) . '/templates.local.php';
+}
