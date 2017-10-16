@@ -18,7 +18,7 @@ Jonah can be obtained from the Horde website and FTP server, at
    ftp://ftp.horde.org/pub/jonah/
 
 Bleeding-edge development versions of Jonah are available via CVS; see
-the file docs/HACKING in the Horde distribution for information on
+the file doc/HACKING in the Horde distribution for information on
 accessing the Horde CVS repository.
 
 
@@ -137,7 +137,7 @@ CONFIGURING Jonah
    found in the po/ directory.  If a translation is not yet available
    for your locale (and you wish to create one), or if you're having
    trouble using a provided translation, please see the
-   horde/docs/TRANSLATIONS file for instructions.
+   horde/doc/TRANSLATIONS file for instructions.
 
     (a). prefs.php
 
