@@ -18,7 +18,7 @@ Framework.</description>
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2017-10-13</date>
+ <date>2017-10-16</date>
  <version>
   <release>1.0.0alpha1</release>
   <api>1.0.0alpha1</api>
@@ -246,7 +246,7 @@ Framework.</description>
    <file name="feed.php" role="horde" />
    <file name="index.php" role="horde" />
    <file name="LICENSE" role="doc" />
-   <file name="README" role="doc" />
+   <file name="README.rst" role="doc" />
   </dir> <!-- / -->
  </contents>
  <dependencies>
@@ -272,7 +272,7 @@ Framework.</description>
    <install as="jonah/feed.php" name="feed.php" />
    <install as="jonah/index.php" name="index.php" />
    <install as="LICENSE" name="LICENSE" />
-   <install as="README" name="README" />
+   <install as="README.rst" name="README.rst" />
    <install as="jonah/channels/delete.php" name="channels/delete.php" />
    <install as="jonah/channels/edit.php" name="channels/edit.php" />
    <install as="jonah/channels/index.php" name="channels/index.php" />
@@ -402,7 +402,7 @@ Framework.</description>
     <release>alpha</release>
     <api>alpha</api>
    </stability>
-   <date>2017-10-13</date>
+   <date>2017-10-16</date>
    <license uri="http://www.horde.org/licenses/bsd">BSD-2-Clause</license>
    <notes>
 * [jan] Officially support PHP 7.
