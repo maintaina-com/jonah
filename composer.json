@@ -17,7 +17,7 @@
         }
     ],
     "version": "1.0.0alpha1",
-    "time": "2016-12-21",
+    "time": "2017-10-17",
     "repositories": [
         {
             "type": "pear",
@@ -25,7 +25,16 @@
         }
     ],
     "require": {
-        "php": "^5.3",
+        "php": "^5.3 || ^7",
         "pear-pear.php.net/DB": "*"
+    },
+    "replace": {
+        "pear-pear.horde.org/jonah": "1.*",
+        "pear-horde/jonah": "1.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "Jonah": "lib/"
+        }
     }
 }
