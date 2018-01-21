@@ -130,7 +130,7 @@ class Jonah_Driver
         }
 
         if (empty($criteria['channel_id'])) {
-            throw InvalidArgumentException('Missing expected channel_id parameter.');
+            throw new InvalidArgumentException('Missing expected channel_id parameter.');
         }
 
         // Validate that we have proper Horde_Date objects
