@@ -129,8 +129,8 @@ class Jonah_Driver
             $criteria['channel_id'] = $this->getIdBySlug($criteria['channel']);
         }
 
-        if (empty($criteria['channel_id'])) {
-            throw new InvalidArgumentException('Missing expected channel_id parameter.');
+        if (!isset($criteria['channel']) && empty($criteria['channel_id'])) {
+            $criteria['channel_id'] = array_map(function($ar) { return $ar['channel_id']; }, $this->getChannels());
         }
 
         // Validate that we have proper Horde_Date objects

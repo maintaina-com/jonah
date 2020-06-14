@@ -406,9 +406,16 @@ class Jonah_Driver_Sql extends Jonah_Driver
            'stories.story_updated AS updated, ' .
            'stories.story_read AS readcount ' .
            'FROM jonah_stories AS stories ' .
-           'WHERE stories.channel_id=?';
+           'WHERE stories.channel_id';
 
-        $values = array($criteria['channel_id']);
+       if (is_array($criteria['channel_id'])) {
+            $channel_ids = ' IN (' . str_repeat('?,', count($criteria['channel_id']) - 1) . ' ?)';
+            $values = $criteria['channel_id'];
+        } else {
+            $channel_ids = ' = ?';
+            $values = array($criteria['channel_id']);
+        }
+        $sql .= $channel_ids;
 
         // Apply date filtering
         if (isset($criteria['updated-min'])) {
