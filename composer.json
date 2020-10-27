@@ -1,37 +1,39 @@
 {
     "name": "horde/jonah",
     "description": "Newsfeed application",
-    "type": "project",
+    "type": "horde-application",
     "homepage": "https://www.horde.org",
     "license": "BSD-2-Clause",
     "authors": [
         {
-            "name": "Chuck Hagenbuch",
-            "email": "chuck@horde.org",
+            "name": "Jan Schneider",
+            "email": "jan@horde.org",
             "role": "lead"
         },
         {
-            "name": "Jan Schneider",
-            "email": "jan@horde.org",
+            "name": "Chuck Hagenbuch",
+            "email": "chuck@horde.org",
             "role": "lead"
         }
     ],
     "version": "1.0.0alpha1",
-    "time": "2017-11-11",
+    "time": "2020-10-27",
     "repositories": [
         {
-            "type": "pear",
-            "url": "https://pear.horde.org"
+            "type": "composer",
+            "url": "https://horde-satis.maintaina.com"
+        },
+        {
+            "url": "https://pear.php.net",
+            "type": "pear"
         }
     ],
     "require": {
+        "horde/horde-installer-plugin": "dev-master",
         "php": "^5.3 || ^7",
         "pear-pear.php.net/DB": "*"
     },
-    "replace": {
-        "pear-pear.horde.org/jonah": "1.*",
-        "pear-horde/jonah": "1.*"
-    },
+    "suggest": {},
     "autoload": {
         "psr-0": {
             "Jonah": "lib/"
