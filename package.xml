@@ -8,18 +8,18 @@ from various sources, written in PHP and utilizing the Horde Application
 Framework.
 </description>
  <lead>
-  <name>Chuck Hagenbuch</name>
-  <user>chuck</user>
-  <email>chuck@horde.org</email>
-  <active>yes</active>
- </lead>
- <lead>
   <name>Jan Schneider</name>
   <user>jan</user>
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2017-11-11</date>
+ <lead>
+  <name>Chuck Hagenbuch</name>
+  <user>chuck</user>
+  <email>chuck@horde.org</email>
+  <active>no</active>
+ </lead>
+ <date>2021-03-21</date>
  <version>
   <release>1.0.0alpha1</release>
   <api>1.0.0alpha1</api>
@@ -100,6 +100,11 @@ Framework.
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
+   <dir name=".github">
+    <dir name="workflows">
+     <file name="phpdoc.yml" role="horde" />
+    </dir> <!-- /.github/workflows -->
+   </dir> <!-- /.github -->
    <dir name="channels">
     <file name="delete.php" role="horde" />
     <file name="edit.php" role="horde" />
@@ -318,21 +323,18 @@ Framework.
  <dependencies>
   <required>
    <php>
-    <min>5.3.0</min>
+    <min>7.0.0</min>
     <max>8.0.0alpha1</max>
     <exclude>8.0.0alpha1</exclude>
    </php>
    <pearinstaller>
     <min>1.7.0</min>
    </pearinstaller>
-   <package>
-    <name>DB</name>
-    <channel>pear.php.net</channel>
-   </package>
   </required>
  </dependencies>
  <phprelease>
   <filelist>
+   <install as="jonah/.github/workflows/phpdoc.yml" name=".github/workflows/phpdoc.yml" />
    <install as="jonah/.htaccess" name=".htaccess" />
    <install as="jonah/dispatcher.php" name="dispatcher.php" />
    <install as="jonah/feed.php" name="feed.php" />
@@ -468,7 +470,7 @@ Framework.
     <release>alpha</release>
     <api>alpha</api>
    </stability>
-   <date>2017-11-11</date>
+   <date>2021-03-21</date>
    <license uri="http://www.horde.org/licenses/bsd">BSD-2-Clause</license>
    <notes>
 * [jan] Officially support PHP 7.
